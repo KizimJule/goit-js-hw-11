@@ -18,14 +18,40 @@ body {
 .search {
   height: 60px;
   background: rgb(11, 62, 191);
-  /* position: fixed; */
+  position: fixed;
+  width: 100%;
 }
 .search-form {
   display: flex;
   justify-content: center;
-  padding-top: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 input {
+  display: flex;
+  justify-content: center;
   height: 30px;
   width: 250px;
+  border: #212121;
+  border-radius: 6;
+}
+.button {
+  width: 30px;
+  height: 30px;
+  border: #212121;
+  border-top-right-radius: 6;
+  border-bottom-right-radius: 6;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+.svg {
+  width: 14px;
+  height: 14px;
+  border-top-right-radius: 6;
+  border-bottom-right-radius: 6;
+  /* position: absolute;
+  right: 0; */
 }
