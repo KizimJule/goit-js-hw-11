@@ -11,14 +11,14 @@ body {
   background-color: #fff;
   color: #212121;
   line-height: 1.5;
-  /* padding: 30px; */
   margin: 0;
 }
 
 .search {
   height: 60px;
-  background: rgb(11, 62, 191);
+  background: rgba(37, 84, 204, 0.716);
   position: fixed;
+  top: 0;
   width: 100%;
 }
 .search-form {
@@ -32,15 +32,16 @@ body {
 input {
   display: flex;
   justify-content: center;
-  height: 30px;
-  width: 250px;
+  height: 40px;
+  width: 280px;
   border: #212121;
   border-radius: 6;
 }
 .button {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border: #212121;
+  background: rgba(122, 122, 122, 0.674);
   border-top-right-radius: 6;
   border-bottom-right-radius: 6;
   position: absolute;
@@ -55,3 +56,33 @@ input {
   /* position: absolute;
   right: 0; */
 }
+
+.gallery {
+  margin-top: 60px;
+  background: red;
+  height: 50px;
+}
+
+.load-more-btn {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 140px;
+  height: 30px; */
+  margin: 10px auto 0;
+  /* margin-top: 10px; */
+  padding: 6px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.88;
+  letter-spacing: 0.06em;
+  background-color: rgb(68, 138, 222);
+  /* box-shadow: $button-shadow; */
+  color: #fff;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+
