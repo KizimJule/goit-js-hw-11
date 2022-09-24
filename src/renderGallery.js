@@ -6,16 +6,20 @@ export function renderGallery(images = []) {
   <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
   <div class="info">
     <p class="info-item">
-      <b>Likes${image.likes}</b>
+      <b>Likes</b>
+      ${image.likes}
     </p>
     <p class="info-item">
-      <b>Views${image.views}</b>
+      <b>Views</b>
+      ${image.views}
     </p>
     <p class="info-item">
-      <b>Comments${image.comments}</b>
+      <b>Comments</b>
+      ${image.comments}
     </p>
     <p class="info-item">
-      <b>Downloads${image.downloads}</b>
+      <b>Downloads</b>
+      ${image.downloads}
     </p>
   </div>
 </div>
