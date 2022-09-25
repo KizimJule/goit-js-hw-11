@@ -12,6 +12,7 @@ body {
   color: #212121;
   line-height: 1.5;
   margin: 0;
+  /* padding: 60px; */
 }
 
 .search {
@@ -60,10 +61,10 @@ input {
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 70px;
+  gap: 10px;
+  margin: 70px 20px 20px 20px;
   justify-content: center;
-  margin-left: -20px;
+  /* margin-left: -20px; */
 }
 
 .load-more-btn {
@@ -75,7 +76,7 @@ input {
   height: 30px; */
   margin: 10px auto 0;
   /* margin-top: 10px; */
-  padding: 6px 20px;
+  padding: 4px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -88,11 +89,13 @@ input {
   color: #fff;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
+.load-more-btn.is-hidden {
+  display: none;
+}
 img {
   display: block;
   max-width: 100%;
-  height: 30vh;
+  height: 160px;
   object-fit: cover;
 }
 .photo-card {
@@ -103,16 +106,28 @@ img {
   border: 1px solid rgb(197, 194, 194);
   /* flex-basis: calc((100% - 4 * 15px) / 2);
   margin: 15px; */
+  flex-basis: calc((100% - 6 * 15px) / 5);
 }
+
+.photo-card:hover {
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+  transform: scale(1.04);
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .info {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .info-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: black;
-  font-size: 12px;
-  padding: 10px;
+  font-size: 10px;
+}
+.info-item + .info-item {
+  margin-left: 7px;
 }
