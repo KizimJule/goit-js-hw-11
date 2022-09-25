@@ -75,7 +75,7 @@ function onLoadMoreBtnClick() {
       captionsData: 'alt',
       captionDelay: 250,
     }).refresh();
-    totalPages = Math.ceil(data.totalHits / perPage);
+
     const { height: cardHeight } = document
       .querySelector('.gallery')
       .firstElementChild.getBoundingClientRect();
@@ -84,6 +84,8 @@ function onLoadMoreBtnClick() {
       top: cardHeight * 2,
       behavior: 'smooth',
     });
+
+    totalPages = Math.ceil(data.totalHits / perPage);
     if (page >= totalPages) {
       endSearch.classList.remove('is-hidden');
       loadMoreBtn.classList.add('is-hidden');
