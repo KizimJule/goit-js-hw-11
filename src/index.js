@@ -2,9 +2,12 @@ import './css/styles.css';
 import { fetchPicturs } from './fetchPicturs.js';
 import Notiflix from 'notiflix';
 import { renderGallery } from './renderGallery.js';
+// Описан в документации
+import SimpleLightbox from 'simplelightbox';
+// Дополнительный импорт стилей
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const form = document.querySelector('#search-form');
-const pictureSearchInput = document.querySelector('[name="searchQuery"]');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more-btn');
 
@@ -18,8 +21,8 @@ let totalPages = 0;
 form.addEventListener('submit', onPictureInput);
 loadMoreBtn.addEventListener('click', onLoadMoreBtnClick);
 
-async function onPictureInput(evt) {
-  loadMoreBtn.classList.remove('is-hidden');
+function onPictureInput(evt) {
+  // loadMoreBtn.classList.remove('is-hidden');
   evt.preventDefault();
   window.scrollTo({ top: 0 });
   page = 1;
@@ -34,12 +37,14 @@ async function onPictureInput(evt) {
     .then(data => {
       loadMoreBtn.classList.add('is-hidden');
       gallery.innerHTML = '';
-      console.log(data);
+
       if (data.totalHits === 0) {
         alertNotFoundImages();
       } else {
         gallery.insertAdjacentHTML('beforeend', renderGallery(data.hits));
         alertImagesFound(data);
+        simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+
         if (data.totalHits > perPage) {
           loadMoreBtn.classList.remove('is-hidden');
         }
@@ -50,12 +55,20 @@ async function onPictureInput(evt) {
 
 function onLoadMoreBtnClick() {
   page += 1;
-  // simpleLightBox.destroy();
+  simpleLightBox.destroy();
 
   fetchPicturs(name, page, perPage).then(data => {
     gallery.insertAdjacentHTML('beforeend', renderGallery(data.hits));
-    console.log(data);
+    simpleLightBox = new SimpleLightbox('.gallery a').refresh();
     totalPages = Math.ceil(data.totalHits / perPage);
+    const { height: cardHeight } = document
+      .querySelector('.gallery')
+      .firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
     if (page >= totalPages) {
       // loadMoreBtn.style.display = 'none';
       loadMoreBtn.classList.add('is-hidden');
@@ -73,8 +86,8 @@ function alertNotFoundImages() {
     `Sorry, there are no images matching your search query. Please try again.`
   );
 }
-function alertImagesFound(images) {
-  Notiflix.Notify.success(`Hooray! We found ${images.totalHits} images.`);
+function alertImagesFound(data) {
+  Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
 }
 function alertEndOfSearch() {
   Notiflix.Notify.failure(

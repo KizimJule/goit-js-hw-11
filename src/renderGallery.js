@@ -2,6 +2,7 @@ export function renderGallery(images = []) {
   const markup = images
     .map(image => {
       return `
+       <a href="${image.largeImageURL}">
           <div class="photo-card">
   <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
   <div class="info">
@@ -23,6 +24,7 @@ export function renderGallery(images = []) {
     </p>
   </div>
 </div>
+</a>
           `;
     })
     .join('');
