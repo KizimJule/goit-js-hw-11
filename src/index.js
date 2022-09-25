@@ -40,7 +40,7 @@ function onPictureInput(evt) {
 
   fetchPicturs(name, page, perPage)
     .then(data => {
-      loadMoreBtn.classList.add('is-hidden');
+      // loadMoreBtn.classList.add('is-hidden');
       endSearch.classList.add('is-hidden');
       gallery.innerHTML = '';
 
