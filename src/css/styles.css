@@ -75,10 +75,7 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 140px;
-  height: 30px; */
   margin: 10px auto 0;
-  /* margin-top: 10px; */
   padding: 4px 16px;
   border: none;
   border-radius: 4px;
@@ -87,12 +84,12 @@ input {
   font-size: 16px;
   line-height: 1.88;
   letter-spacing: 0.06em;
-  background-color: rgb(68, 138, 222);
+  background-color: rgba(37, 84, 204);
   /* box-shadow: $button-shadow; */
   color: #fff;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.load-more-btn.is-hidden {
+.is-hidden {
   display: none;
 }
 img {
@@ -134,4 +131,13 @@ a:focus {
 }
 .info-item + .info-item {
   margin-left: 7px;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.end-search {
+  text-align: center;
+  font-size: 14px;
+  color: rgba(37, 84, 204);
 }

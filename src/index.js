@@ -10,8 +10,11 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const form = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more-btn');
+const endSearch = document.querySelector('.end-search');
 
 loadMoreBtn.classList.add('is-hidden');
+endSearch.classList.add('is-hidden');
+
 gallery.innerHTML = '';
 let name = '';
 let perPage = 40;
@@ -23,6 +26,8 @@ loadMoreBtn.addEventListener('click', onLoadMoreBtnClick);
 
 function onPictureInput(evt) {
   // loadMoreBtn.classList.remove('is-hidden');
+  endSearch.classList.add('is-hidden');
+  loadMoreBtn.classList.add('is-hidden');
   evt.preventDefault();
   window.scrollTo({ top: 0 });
   page = 1;
@@ -36,14 +41,20 @@ function onPictureInput(evt) {
   fetchPicturs(name, page, perPage)
     .then(data => {
       loadMoreBtn.classList.add('is-hidden');
+      endSearch.classList.add('is-hidden');
       gallery.innerHTML = '';
 
       if (data.totalHits === 0) {
         alertNotFoundImages();
       } else {
         gallery.insertAdjacentHTML('beforeend', renderGallery(data.hits));
+
         alertImagesFound(data);
-        simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+        simpleLightBox = new SimpleLightbox('.gallery a', {
+          captions: true,
+          captionsData: 'alt',
+          captionDelay: 250,
+        }).refresh();
 
         if (data.totalHits > perPage) {
           loadMoreBtn.classList.remove('is-hidden');
@@ -59,7 +70,11 @@ function onLoadMoreBtnClick() {
 
   fetchPicturs(name, page, perPage).then(data => {
     gallery.insertAdjacentHTML('beforeend', renderGallery(data.hits));
-    simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+    simpleLightBox = new SimpleLightbox('.gallery a', {
+      captions: true,
+      captionsData: 'alt',
+      captionDelay: 250,
+    }).refresh();
     totalPages = Math.ceil(data.totalHits / perPage);
     const { height: cardHeight } = document
       .querySelector('.gallery')
@@ -70,9 +85,9 @@ function onLoadMoreBtnClick() {
       behavior: 'smooth',
     });
     if (page >= totalPages) {
-      // loadMoreBtn.style.display = 'none';
+      endSearch.classList.remove('is-hidden');
       loadMoreBtn.classList.add('is-hidden');
-      alertEndOfSearch();
+      // alertEndOfSearch();
     }
   });
 }
