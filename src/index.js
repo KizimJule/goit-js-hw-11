@@ -14,7 +14,9 @@ const endSearch = document.querySelector('.end-search');
 
 loadMoreBtn.classList.add('is-hidden');
 endSearch.classList.add('is-hidden');
-
+let galleryImg = new SimpleLightbox('.gallery a', {
+  /* options */ enableKeyboard: true,
+});
 gallery.innerHTML = '';
 let name = '';
 let perPage = 40;
@@ -50,11 +52,12 @@ function onPictureInput(evt) {
         gallery.insertAdjacentHTML('beforeend', renderGallery(data.hits));
 
         alertImagesFound(data);
-        simpleLightBox = new SimpleLightbox('.gallery a', {
-          captions: true,
-          captionsData: 'alt',
-          captionDelay: 250,
-        }).refresh();
+        // simpleLightBox = new SimpleLightbox('.gallery a', {
+        //   captions: true,
+        //   captionsData: 'alt',
+        //   captionDelay: 250,
+        // })
+        galleryImg.refresh();
 
         if (data.totalHits > perPage) {
           loadMoreBtn.classList.remove('is-hidden');
@@ -66,15 +69,11 @@ function onPictureInput(evt) {
 
 function onLoadMoreBtnClick() {
   page += 1;
-  simpleLightBox.destroy();
+  // galleryImg.destroy();
 
   fetchPicturs(name, page, perPage).then(data => {
     gallery.insertAdjacentHTML('beforeend', renderGallery(data.hits));
-    simpleLightBox = new SimpleLightbox('.gallery a', {
-      captions: true,
-      captionsData: 'alt',
-      captionDelay: 250,
-    }).refresh();
+    galleryImg.refresh();
 
     const { height: cardHeight } = document
       .querySelector('.gallery')
